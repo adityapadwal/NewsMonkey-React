@@ -4,7 +4,6 @@ import Spinner from './spinner';
 import PropTypes from 'prop-types'
 import InfiniteScroll from "react-infinite-scroll-component";
 
-
 export class News extends Component {
   articles = []
 
@@ -37,18 +36,18 @@ export class News extends Component {
   };
   
   async updateNews()
-{
-    const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=6483299ac99a411e80cb45c48a61e2a9&page=${this.state.page}&pageSize=${this.props.pageSize}`;
-    this.setState({loading: true});
-    let data = await fetch(url); 
-    let parseData = await data.json()
-    
-    this.setState({articles: parseData.articles, totalResults: parseData.totalResults, loading: false})
-}  
+  {
+      const url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.category}&apiKey=46355f02d04e4f778822e4e7829d1b66&page=${this.state.page}&pageSize=${this.props.pageSize}`;
+      this.setState({loading: true});
+      let data = await fetch(url); 
+      let parseData = await data.json()
+      
+      this.setState({articles: parseData.articles, totalResults: parseData.totalResults, loading: false})
+  }  
 
-async componentDidMount(){
-    this.updateNews()
-  }
+  async componentDidMount(){
+      this.updateNews()
+    }
 
   //  handlePrevious = async ()=>{
   //   //console.log("Previous");
@@ -93,17 +92,11 @@ async componentDidMount(){
     let parseData = await data.json();
     
     this.setState({articles: this.state.articles.concat(parseData.articles), totalResults: parseData.totalResults, loading: false})
-
   };
     
-  
-
   render() {
     return (
-
       <>
-     
-      
         <h1 className="text-center">NewsMonkey - Top {this.capitalizeFirstLetter(this.props.category)} Headlines </h1>
         {this.state.loading && <Spinner/>}
         <InfiniteScroll
@@ -128,8 +121,6 @@ async componentDidMount(){
         <button disabled={this.state.page<=1} type="button" className="btn btn-outline-dark" onClick={this.handlePrevious}>&larr; Previous</button>
         <button disabled={this.state.page+1 > Math.ceil(this.state.totalResults/this.props.pageSize)} type="button" className="btn btn-outline-dark" onClick={this.handleNext}>Next &rarr;</button>
         </div> */}
-     
-
       </>
 
     )
